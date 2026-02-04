@@ -1,15 +1,7 @@
 import SwiftUI
 
 struct LocationsListView: View {
-    private let locations: [Location]
-    
-    init() {
-        locations = [
-            .init(name: "Amsterdam", lat: 12.45, long: 15.14),
-            .init(name: "Dubai", lat: 13.319, long: 9.31),
-            .init(name: "Rio", lat: 4.481, long: 7.3),
-        ]
-    }
+    @StateObject private var viewModel = LocationsListViewModel(locationsRepository: LocationsRepositoryAPI())
     
     var body: some View {
         VStack {
@@ -19,6 +11,8 @@ struct LocationsListView: View {
             listSectionView()
             
             Spacer()
+        }.task {
+            await viewModel.getAllLocations()
         }
     }
     
@@ -37,9 +31,9 @@ struct LocationsListView: View {
     }
     
     private func listSectionView() -> some View {
-        List(locations) { location in
+        List(viewModel.locations) { location in
             VStack(alignment: .leading) {
-                Text(location.name ?? "- -")
+                Text(location.name)
                     .font(.title)
                 
                 Text("Latitude: \(location.lat)")
@@ -53,6 +47,6 @@ struct LocationsListView: View {
     }
 }
 
-#Preview {
-    LocationsListView()
-}
+//#Preview {
+//    LocationsListView()
+//}
