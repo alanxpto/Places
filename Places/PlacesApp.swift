@@ -4,7 +4,7 @@ import SwiftUI
 struct PlacesApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            LocationsListView()
         }
     }
 }
