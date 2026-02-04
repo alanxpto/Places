@@ -1,17 +1,15 @@
 import SwiftUI
 
 struct InputLocationView: View {
-    // private let viewModel = InputLocationViewModel()
-    
     @Environment(\.dismiss) private var dismiss
     
     @State private var inputLocationName = ""
     @State private var inputLocationLatitude = ""
     @State private var inputLocationLongitude = ""
     
-    @ObservedObject var viewModel: LocationsListViewModel
+    @State private var showError = false
     
-    var newLocation: Location?
+    @ObservedObject var viewModel: LocationsListViewModel
     
     var body: some View {
         VStack {
@@ -20,7 +18,13 @@ struct InputLocationView: View {
             inputFieldsSectionView()
             
             buttonsSectionView()
-        }
+        }.alert("Attention", isPresented: $showError, actions: {
+            Button("OK", role: .cancel) {
+                showError = false
+            }
+        }, message: {
+            Text("One or more location fields are invalid. Please check and try again.")
+        })
     }
     
     private func headerSectionView() -> some View {
@@ -33,15 +37,15 @@ struct InputLocationView: View {
     
     private func inputFieldsSectionView() -> some View {
         Group {
-            TextField("Type the location name here", text: $inputLocationName)
+            TextField("Type the name here", text: $inputLocationName)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding(.horizontal, 8)
             
-            TextField("Type the location latitude here", text: $inputLocationLatitude)
+            TextField("Type the latitude here", text: $inputLocationLatitude)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding(.horizontal, 8)
             
-            TextField("Type the location longitude here", text: $inputLocationLongitude)
+            TextField("Type the longitude here", text: $inputLocationLongitude)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding(.horizontal, 8)
         }
@@ -61,13 +65,12 @@ struct InputLocationView: View {
             
             Button("Confirm") {
                 if let location = viewModel.createNewLocation(name: inputLocationName, latitude: inputLocationLatitude, longitude: inputLocationLongitude) {
-                    print("User typed: \(inputLocationName)")
-                    print("User typed: \(inputLocationLatitude)")
-                    print("User typed: \(inputLocationLongitude)")
                     
                     viewModel.addLocation(location: location)
                     
                     dismiss()
+                } else {
+                    showError = true
                 }
             }
             
