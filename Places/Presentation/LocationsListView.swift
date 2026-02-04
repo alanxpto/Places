@@ -2,6 +2,7 @@ import SwiftUI
 
 struct LocationsListView: View {
     @StateObject private var viewModel = LocationsListViewModel(locationsRepository: LocationsRepositoryAPI())
+    @State private var selectedLocationID: UUID?
     
     var body: some View {
         VStack {
@@ -22,11 +23,13 @@ struct LocationsListView: View {
                 .multilineTextAlignment(.center)
                 .font(.title)
                 .fontWeight(.bold)
+                .foregroundStyle(Color("abn_green"))
             
             Text("Tap a location to open the Wikipedia app and read articles about it")
                 .multilineTextAlignment(.center)
                 .font(.headline)
                 .fontWeight(.medium)
+                .foregroundStyle(Color("abn_yellow"))
         }
     }
     
@@ -41,6 +44,15 @@ struct LocationsListView: View {
                 
                 Text("Longitude: \(location.long)")
                     .font(.callout)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .cornerRadius(8)
+            .contentShape(Rectangle())
+            .listRowBackground(
+                selectedLocationID == location.id ? Color("abn_green").opacity(0.3) : Color.clear
+            )
+            .onTapGesture {
+                selectedLocationID = location.id
             }
         }
         .listStyle(PlainListStyle())
