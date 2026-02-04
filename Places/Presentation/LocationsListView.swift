@@ -16,7 +16,11 @@ struct LocationsListView: View {
             
             Spacer()
         }.task {
-            await viewModel.getAllLocations()
+            do {
+                try await viewModel.getAllLocations()
+            } catch {
+                
+            }
         }
         .sheet(isPresented: $showInputLocation) {
             InputLocationView(viewModel: viewModel)
@@ -75,6 +79,6 @@ struct LocationsListView: View {
     }
 }
 
-//#Preview {
-//    LocationsListView()
-//}
+#Preview {
+    LocationsListView()
+}

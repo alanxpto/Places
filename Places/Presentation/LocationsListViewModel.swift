@@ -9,22 +9,18 @@ final class LocationsListViewModel: ObservableObject {
         self.locationsRepository = locationsRepository
     }
     
-    func getAllLocations() async {
-        do {
-            let response = try await locationsRepository.fetchAll()
-            
-            await MainActor.run {
-                locations = response?.locations.map { locationResponse in
-                    Location(
-                        id: UUID(),
-                        name: locationResponse.name ?? "Unknown",
-                        lat: locationResponse.lat,
-                        long: locationResponse.long
-                    )
-                } ?? []
-            }
-        } catch {
-            
+    func getAllLocations() async throws {
+        let response = try await locationsRepository.fetchAll()
+        
+        await MainActor.run {
+            locations = response?.locations.map { locationResponse in
+                Location(
+                    id: UUID(),
+                    name: locationResponse.name ?? "Unknown",
+                    lat: locationResponse.lat,
+                    long: locationResponse.long
+                )
+            } ?? []
         }
     }
     
