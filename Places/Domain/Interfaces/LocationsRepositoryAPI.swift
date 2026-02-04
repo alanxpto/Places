@@ -10,11 +10,7 @@ final class LocationsRepositoryAPI: LocationsRepository {
         
         let (data, _) = try await URLSession.shared.data(from: url)
         
-        print("Alan - data \(data) !!!")
-        
         let json = try JSONDecoder().decode(LocationsResponse.self, from: data)
-        
-        print("Alan - json \(json) !!!")
                 
         return json
     }

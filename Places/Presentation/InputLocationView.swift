@@ -1,11 +1,15 @@
 import SwiftUI
 
 struct InputLocationView: View {
+    private let viewModel = InputLocationViewModel()
+    
     @Environment(\.dismiss) private var dismiss
     
     @State private var inputLocationName = ""
     @State private var inputLocationLatitude = ""
     @State private var inputLocationLongitude = ""
+    
+    var newLocation: Location?
     
     var body: some View {
         VStack {
@@ -54,11 +58,13 @@ struct InputLocationView: View {
             }
             
             Button("Confirm") {
-                print("User typed: \(inputLocationName)")
-                print("User typed: \(inputLocationLatitude)")
-                print("User typed: \(inputLocationLongitude)")
-                
-                dismiss()
+                if let location = viewModel.createNewLocation(name: inputLocationName, latitude: inputLocationLatitude, longitude: inputLocationLongitude) {
+                    print("User typed: \(inputLocationName)")
+                    print("User typed: \(inputLocationLatitude)")
+                    print("User typed: \(inputLocationLongitude)")
+                    
+                    dismiss()
+                }
             }
             
             Spacer()
