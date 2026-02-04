@@ -1,13 +1,15 @@
 import SwiftUI
 
 struct InputLocationView: View {
-    private let viewModel = InputLocationViewModel()
+    // private let viewModel = InputLocationViewModel()
     
     @Environment(\.dismiss) private var dismiss
     
     @State private var inputLocationName = ""
     @State private var inputLocationLatitude = ""
     @State private var inputLocationLongitude = ""
+    
+    @ObservedObject var viewModel: LocationsListViewModel
     
     var newLocation: Location?
     
@@ -63,6 +65,8 @@ struct InputLocationView: View {
                     print("User typed: \(inputLocationLatitude)")
                     print("User typed: \(inputLocationLongitude)")
                     
+                    viewModel.addLocation(location: location)
+                    
                     dismiss()
                 }
             }
@@ -73,6 +77,6 @@ struct InputLocationView: View {
     }
 }
 
-#Preview {
-    InputLocationView()
-}
+//#Preview {
+//    InputLocationView()
+//}

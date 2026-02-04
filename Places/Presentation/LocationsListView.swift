@@ -2,6 +2,7 @@ import SwiftUI
 
 struct LocationsListView: View {
     @StateObject private var viewModel = LocationsListViewModel(locationsRepository: LocationsRepositoryAPI())
+    
     @State private var selectedLocationID: UUID?
     @State private var showInputLocation = false
     
@@ -18,7 +19,7 @@ struct LocationsListView: View {
             await viewModel.getAllLocations()
         }
         .sheet(isPresented: $showInputLocation) {
-            InputLocationView()
+            InputLocationView(viewModel: viewModel)
         }
     }
     
