@@ -1,10 +1,3 @@
-//
-//  ContentView.swift
-//  Places
-//
-//  Created by Alan Filipe Cardozo Fabeni on 04/02/2026.
-//
-
 import SwiftUI
 
 struct ContentView: View {
@@ -15,7 +8,7 @@ struct ContentView: View {
                 .foregroundStyle(.tint)
             Text("Hello, world!")
         }
-        .padding()
+        .padding()        
     }
 }
 
