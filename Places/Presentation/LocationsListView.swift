@@ -3,6 +3,7 @@ import SwiftUI
 struct LocationsListView: View {
     @StateObject private var viewModel = LocationsListViewModel(locationsRepository: LocationsRepositoryAPI())
     @State private var selectedLocationID: UUID?
+    @State private var showInputLocation = false
     
     var body: some View {
         VStack {
@@ -10,10 +11,14 @@ struct LocationsListView: View {
                 .padding(.horizontal, 16)
             
             listSectionView()
+                .padding(.horizontal, 16)
             
             Spacer()
         }.task {
             await viewModel.getAllLocations()
+        }
+        .sheet(isPresented: $showInputLocation) {
+            InputLocationView()
         }
     }
     
@@ -25,11 +30,21 @@ struct LocationsListView: View {
                 .fontWeight(.bold)
                 .foregroundStyle(Color("abn_green"))
             
-            Text("Tap a location to open the Wikipedia app and read articles about it")
+            Text("Select a location in the list or manually input a location to open the Wikipedia app and read articles about it")
                 .multilineTextAlignment(.center)
                 .font(.headline)
                 .fontWeight(.medium)
                 .foregroundStyle(Color("abn_yellow"))
+            
+            Button {
+                showInputLocation = true
+            } label: {
+                Text("Input manual location")
+                    .font(.headline)
+                    .fontWeight(.semibold)
+                    .foregroundStyle(Color("abn_green"))
+            }
+            .padding(.top, 8)
         }
     }
     
