@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="WzA-UW-SPB">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24504"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="2zT-eu-IJ3">
+            <objects>
+                <viewController id="WzA-UW-SPB" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="73N-C0-44E">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash_image" translatesAutoresizingMaskIntoConstraints="NO" id="alB-4c-egy">
+                                <rect key="frame" x="76.666666666666686" y="306" width="240" height="240"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="89X-2i-WCk"/>
+                                    <constraint firstAttribute="height" constant="240" id="yXb-mU-brH"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Places" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tip-qa-aIs">
+                                <rect key="frame" x="149.66666666666666" y="250" width="94" height="36"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                <color key="textColor" name="abn_green"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="1Kj-tw-RYr"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="alB-4c-egy" firstAttribute="centerX" secondItem="1Kj-tw-RYr" secondAttribute="centerX" id="7Pd-Qt-Nq2"/>
+                            <constraint firstItem="alB-4c-egy" firstAttribute="top" secondItem="tip-qa-aIs" secondAttribute="bottom" constant="20" id="TpO-OR-ZBL"/>
+                            <constraint firstItem="tip-qa-aIs" firstAttribute="centerX" secondItem="1Kj-tw-RYr" secondAttribute="centerX" id="qmN-0B-Mzg"/>
+                            <constraint firstItem="alB-4c-egy" firstAttribute="centerY" secondItem="73N-C0-44E" secondAttribute="centerY" id="trL-BP-g6j"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Lc6-nA-9ED" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-11" y="82"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="splash_image" width="1024" height="1024"/>
+        <namedColor name="abn_green">
+            <color red="0.25098039215686274" green="0.56862745098039214" blue="0.52941176470588236" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
