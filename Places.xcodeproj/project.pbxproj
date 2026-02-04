@@ -28,6 +28,7 @@
 				Domain/Entities/Location.swift,
 				Domain/Entities/LocationResponse.swift,
 				Domain/Entities/LocationsResponse.swift,
+				Domain/Interfaces/LocationRepositoryError.swift,
 				Domain/Interfaces/LocationsRepository.swift,
 				Presentation/LocationsListViewModel.swift,
 			);

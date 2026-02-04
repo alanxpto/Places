@@ -80,6 +80,6 @@ struct InputLocationView: View {
     }
 }
 
-//#Preview {
-//    InputLocationView()
-//}
+#Preview {
+    InputLocationView(viewModel: LocationsListViewModel(locationsRepository: LocationsRepositoryAPI()))
+}

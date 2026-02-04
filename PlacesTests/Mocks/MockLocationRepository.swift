@@ -9,7 +9,7 @@ final class MockLocationRepository: LocationsRepository {
     
     func fetchAll() async throws -> LocationsResponse? {
         if shouldFail {
-            throw NSError(domain: "Failed", code: 1)
+            throw LocationRepositoryError.unkownError
         }
         
         let amsterdam = LocationResponse(name: "Amsterdam", lat: 52.3547498, long: 4.8339215)

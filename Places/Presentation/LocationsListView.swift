@@ -5,6 +5,7 @@ struct LocationsListView: View {
     
     @State private var selectedLocationID: UUID?
     @State private var showInputLocation = false
+    @State private var showError = false
     
     var body: some View {
         VStack {
@@ -16,10 +17,13 @@ struct LocationsListView: View {
             
             Spacer()
         }.task {
-            do {
-                try await viewModel.getAllLocations()
-            } catch {
-                
+            await viewModel.getAllLocations()
+            
+            showError = viewModel.errorMessage != nil
+        }
+        .alert(viewModel.errorMessage ?? "", isPresented: $showError) {
+            Button("OK") {
+                viewModel.errorMessage = nil
             }
         }
         .sheet(isPresented: $showInputLocation) {

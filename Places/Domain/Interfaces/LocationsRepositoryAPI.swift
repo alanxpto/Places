@@ -5,13 +5,17 @@ final class LocationsRepositoryAPI: LocationsRepository {
     
     func fetchAll() async throws -> LocationsResponse? {
         guard let url = URL(string: address) else {
-            throw URLError(.badURL)
+            throw LocationRepositoryError.invalidUrl
         }
         
         let (data, _) = try await URLSession.shared.data(from: url)
         
-        let json = try JSONDecoder().decode(LocationsResponse.self, from: data)
-                
-        return json
+        do {
+            let json = try JSONDecoder().decode(LocationsResponse.self, from: data)
+            
+            return json
+        } catch {
+            throw LocationRepositoryError.decodingError
+        }
     }
 }
