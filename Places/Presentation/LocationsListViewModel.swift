@@ -44,6 +44,16 @@ final class LocationsListViewModel: ObservableObject {
         locations.append(location)
     }
     
+    func createUrl(latitude: Double, longitude: Double) -> URL? {
+        let string = "wikipedia://places?latitude=\(latitude)&longitude=\(longitude)"
+        
+        guard let url = URL(string: string) else {
+            return nil
+        }
+        
+        return url
+    }
+    
     private func message(for error: LocationRepositoryError) -> String {
         switch error {
         case .invalidUrl:

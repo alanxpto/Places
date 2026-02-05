@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct LocationsListView: View {
+    @Environment(\.openURL) private var openURL
+    
     @StateObject private var viewModel = LocationsListViewModel(locationsRepository: LocationsRepositoryAPI())
     
     @State private var selectedLocationID: UUID?
@@ -76,6 +78,10 @@ struct LocationsListView: View {
                 selectedLocationID == location.id ? Color("abn_green").opacity(0.3) : Color.clear
             )
             .onTapGesture {
+                if let url = viewModel.createUrl(latitude: location.lat, longitude: location.long) {
+                    openURL(url)
+                }
+                
                 selectedLocationID = location.id
             }
         }
