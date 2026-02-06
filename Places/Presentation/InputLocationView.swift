@@ -55,15 +55,27 @@ struct InputLocationView: View {
         HStack {
             Spacer()
             
-            Button("Cancel") {
+            Button {
                 dismiss()
                 
                 inputLocationName = ""
                 inputLocationLatitude = ""
                 inputLocationLongitude = ""
+            } label: {
+                Text("Cancel")
+                    .font(.headline)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 8)
+            .background(.red)
+            .foregroundStyle(.white)
+            .clipShape(Capsule())
+            .frame(height: 44)
             
-            Button("Confirm") {
+            Spacer()
+            
+            Button {
                 if let location = viewModel.createNewLocation(name: inputLocationName, latitude: inputLocationLatitude, longitude: inputLocationLongitude) {
                     
                     viewModel.addLocation(location: location)
@@ -72,7 +84,18 @@ struct InputLocationView: View {
                 } else {
                     showError = true
                 }
+            } label: {
+                Text("Confirm")
+                    .font(.headline)
+                    .fontWeight(.bold)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 8)
+            .background(Color("abn_green"))
+            .foregroundStyle(Color("abn_yellow"))
+            .clipShape(Capsule())
+            .frame(height: 44)
             
             Spacer()
         }

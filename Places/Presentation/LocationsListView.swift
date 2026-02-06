@@ -50,7 +50,7 @@ struct LocationsListView: View {
             Button {
                 showInputLocation = true
             } label: {
-                Text("Input manual location")
+                Text("Tap here to input manual location")
                     .font(.headline)
                     .fontWeight(.semibold)
                     .foregroundStyle(Color("abn_green"))
