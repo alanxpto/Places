@@ -102,4 +102,17 @@ struct LocationsListViewModelTests {
         message = sut.message(for: .unkownError)
         #expect(message == "Something went wrong")
     }
+    
+    @Test("The locations response is parsed to location")
+    func testThatLocationsResponseIsParsedToLocation() async throws {
+        let mock = MockLocationRepository(shouldFail: false)
+        let sut = LocationsListViewModel(locationsRepository: mock)
+        
+        let parsed = sut.parseLocationsResponse(locationResponse: MockLocationsResponse.locationsResponse)
+        
+        #expect(parsed.count == 3)
+        #expect(parsed[0].name == "Amsterdam")
+        #expect(parsed[1].lat == 19.0823998)
+        #expect(parsed[2].long == 12.523785)
+    }
 }
