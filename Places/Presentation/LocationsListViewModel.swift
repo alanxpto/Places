@@ -14,22 +14,27 @@ final class LocationsListViewModel: ObservableObject {
     
     func getAllLocations() async {
         do {
-            let response = try await locationsRepository.fetchAll(url: Constants.locationsUrl)
-
-            locations = response?.locations.map { locationResponse in
-                Location(
-                    id: UUID(),
-                    name: locationResponse.name ?? "Unknown",
-                    lat: locationResponse.lat,
-                    long: locationResponse.long
-                )
-            } ?? []
+            let response = try await locationsRepository.fetchAll(
+                url: Constants.locationsUrl
+            )
+            
+            locations = parseLocationsResponse(locationResponse: response)
         } catch {
             let error = error as? LocationRepositoryError ?? .unkownError
-            
             errorMessage = message(for: error)
             locations = []
         }
+    }
+    
+    func parseLocationsResponse(locationResponse: LocationsResponse?) -> [Location] {
+        return locationResponse?.locations.map { locationResponse in
+            Location(
+                id: UUID(),
+                name: locationResponse.name ?? "Unknown",
+                lat: locationResponse.lat,
+                long: locationResponse.long
+            )
+        } ?? []
     }
     
     func createNewLocation(name: String, latitude: String, longitude: String) -> Location? {
