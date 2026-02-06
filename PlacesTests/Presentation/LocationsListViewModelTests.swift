@@ -87,4 +87,19 @@ struct LocationsListViewModelTests {
         let url = sut.createUrl(latitude: 12.3231, longitude: 9.8173)
         #expect(url?.absoluteString == "wikipedia://places?latitude=12.3231&longitude=9.8173")
     }
+    
+    @Test("The error message is correct")
+    func testThatErrorMessageIsCorrect() async throws {
+        let mock = MockLocationRepository(shouldFail: false)
+        let sut = LocationsListViewModel(locationsRepository: mock)
+        
+        var message = sut.message(for: .decodingError)
+        #expect(message == "Failed to read server response")
+        
+        message = sut.message(for: .invalidUrl)
+        #expect(message == "Invalid URL")
+        
+        message = sut.message(for: .unkownError)
+        #expect(message == "Something went wrong")
+    }
 }

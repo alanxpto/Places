@@ -1,3 +1,3 @@
 protocol LocationsRepository {
-    func fetchAll() async throws -> LocationsResponse?
+    func fetchAll(url: String) async throws -> LocationsResponse?
 }

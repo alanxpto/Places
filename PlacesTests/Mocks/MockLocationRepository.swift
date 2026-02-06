@@ -7,7 +7,7 @@ final class MockLocationRepository: LocationsRepository {
         self.shouldFail = shouldFail
     }
     
-    func fetchAll() async throws -> LocationsResponse? {
+    func fetchAll(url: String) async throws -> LocationsResponse? {
         if shouldFail {
             throw LocationRepositoryError.unkownError
         }

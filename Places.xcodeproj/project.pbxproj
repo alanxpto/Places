@@ -25,6 +25,7 @@
 		E773AA3C2F33B58800F4585A /* Exceptions for "Places" folder in "PlacesTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Constants.swift,
 				Domain/Entities/Location.swift,
 				Domain/Entities/LocationResponse.swift,
 				Domain/Entities/LocationsResponse.swift,

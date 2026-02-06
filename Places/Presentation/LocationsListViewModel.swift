@@ -14,7 +14,7 @@ final class LocationsListViewModel: ObservableObject {
     
     func getAllLocations() async {
         do {
-            let response = try await locationsRepository.fetchAll()
+            let response = try await locationsRepository.fetchAll(url: Constants.locationsUrl)
 
             locations = response?.locations.map { locationResponse in
                 Location(
@@ -54,7 +54,7 @@ final class LocationsListViewModel: ObservableObject {
         return url
     }
     
-    private func message(for error: LocationRepositoryError) -> String {
+    func message(for error: LocationRepositoryError) -> String {
         switch error {
         case .invalidUrl:
             return "Invalid URL"
