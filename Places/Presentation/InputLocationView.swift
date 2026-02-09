@@ -76,7 +76,6 @@ struct InputLocationView: View {
             
             Button {
                 if let location = viewModel.createNewLocation(name: inputLocationName, latitude: inputLocationLatitude, longitude: inputLocationLongitude) {
-                    
                     viewModel.addLocation(location: location)
                     
                     dismiss()

@@ -4,10 +4,10 @@ import Foundation
 @MainActor
 final class LocationsListViewModel: ObservableObject {
     private let locationsRepository: LocationsRepository
-    
+
     @Published var locations: [Location] = []
     @Published var errorMessage: String?
-    
+
     init(locationsRepository: LocationsRepository) {
         self.locationsRepository = locationsRepository
     }
