@@ -18,9 +18,9 @@ final class LocationsListViewModel: ObservableObject {
                 url: Constants.locationsUrl
             )
             
-            locations = parseLocationsResponse(locationResponse: response)
+            locations = locationsRepository.parseLocationsResponse(locationResponse: response)
         } catch {
-            let error = error as? LocationRepositoryError ?? .unkownError
+            let error = error as? LocationRepositoryError ?? .unknownError
             
             errorMessage = message(for: error)
             
@@ -28,37 +28,20 @@ final class LocationsListViewModel: ObservableObject {
         }
     }
     
-    func parseLocationsResponse(locationResponse: LocationsResponse?) -> [Location] {
-        return locationResponse?.locations.map { locationResponse in
-            Location(
-                id: UUID(),
-                name: locationResponse.name ?? "Unknown",
-                lat: locationResponse.lat,
-                long: locationResponse.long
-            )
-        } ?? []
-    }
-    
     func createNewLocation(name: String, latitude: String, longitude: String) -> Location? {
-        guard !name.isEmpty, let lat = Double(latitude), let long = Double(longitude) else {
+        guard !name.isEmpty,
+              let lat = Double(latitude),
+              let long = Double(longitude),
+              (-90...90).contains(lat),
+              (-180...180).contains(long) else {
             return nil
         }
-                
+
         return Location(id: UUID(), name: name, lat: lat, long: long)
     }
     
     func addLocation(location: Location) {
         locations.append(location)
-    }
-    
-    func createUrl(latitude: Double, longitude: Double) -> URL? {
-        let string = "wikipedia://places?latitude=\(latitude)&longitude=\(longitude)"
-        
-        guard let url = URL(string: string) else {
-            return nil
-        }
-        
-        return url
     }
     
     func message(for error: LocationRepositoryError) -> String {
@@ -67,7 +50,7 @@ final class LocationsListViewModel: ObservableObject {
             return "Invalid URL"
         case .decodingError:
             return "Failed to read server response"
-        case .unkownError:
+        case .unknownError:
             return "Something went wrong"
         }
     }

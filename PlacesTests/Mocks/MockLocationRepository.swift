@@ -19,9 +19,13 @@ final class MockLocationRepository: LocationsRepository {
     
     func fetchAll(url: String) async throws -> LocationsResponse? {
         if shouldFail {
-            throw LocationRepositoryError.unkownError
+            throw LocationRepositoryError.unknownError
         }
 
         return MockLocationsResponse.locationsResponse
+    }
+    
+    func parseLocationsResponse(locationResponse: LocationsResponse?) -> [Location] {
+        return []
     }
 }

@@ -6,7 +6,6 @@ struct InputLocationView: View {
     @State private var inputLocationName = ""
     @State private var inputLocationLatitude = ""
     @State private var inputLocationLongitude = ""
-    
     @State private var showError = false
     
     @ObservedObject var viewModel: LocationsListViewModel
@@ -104,5 +103,5 @@ struct InputLocationView: View {
 }
 
 #Preview {
-    InputLocationView(viewModel: LocationsListViewModel(locationsRepository: LocationsRepositoryAPI()))
+    InputLocationView(viewModel: LocationsListViewModel(locationsRepository: RemoteLocationsRepository()))
 }

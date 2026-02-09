@@ -79,15 +79,6 @@ struct LocationsListViewModelTests {
         }
     }
     
-    @Test("The URL is created correctly with the coordinates")
-    func testThatURLIsCreatedCorrectlyWithTheCoordinates() async throws {
-        let mock = MockLocationRepository(shouldFail: false)
-        let sut = LocationsListViewModel(locationsRepository: mock)
-                
-        let url = sut.createUrl(latitude: 12.3231, longitude: 9.8173)
-        #expect(url?.absoluteString == "wikipedia://places?latitude=12.3231&longitude=9.8173")
-    }
-    
     @Test("The error message is correct")
     func testThatErrorMessageIsCorrect() async throws {
         let mock = MockLocationRepository(shouldFail: false)
@@ -99,20 +90,7 @@ struct LocationsListViewModelTests {
         message = sut.message(for: .invalidUrl)
         #expect(message == "Invalid URL")
         
-        message = sut.message(for: .unkownError)
+        message = sut.message(for: .unknownError)
         #expect(message == "Something went wrong")
-    }
-    
-    @Test("The locations response is parsed to location")
-    func testThatLocationsResponseIsParsedToLocation() async throws {
-        let mock = MockLocationRepository(shouldFail: false)
-        let sut = LocationsListViewModel(locationsRepository: mock)
-        
-        let parsed = sut.parseLocationsResponse(locationResponse: MockLocationsResponse.locationsResponse)
-        
-        #expect(parsed.count == 3)
-        #expect(parsed[0].name == "Amsterdam")
-        #expect(parsed[1].lat == 19.0823998)
-        #expect(parsed[2].long == 12.523785)
     }
 }

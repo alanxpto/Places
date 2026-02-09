@@ -1,6 +1,6 @@
 import Foundation
 
-final class LocationsRepositoryAPI: LocationsRepository {
+final class RemoteLocationsRepository: LocationsRepository {
     private let session: URLSession
     
     init(session: URLSession = .shared) {
@@ -23,5 +23,16 @@ final class LocationsRepositoryAPI: LocationsRepository {
         } catch {
             throw LocationRepositoryError.decodingError
         }
+    }
+    
+    func parseLocationsResponse(locationResponse: LocationsResponse?) -> [Location] {
+        return locationResponse?.locations.map { locationResponse in
+            Location(
+                id: UUID(),
+                name: locationResponse.name ?? "Unknown",
+                lat: locationResponse.lat,
+                long: locationResponse.long
+            )
+        } ?? []
     }
 }

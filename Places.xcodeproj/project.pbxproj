@@ -30,8 +30,10 @@
 				Domain/Entities/LocationsResponse.swift,
 				Domain/Interfaces/LocationRepositoryError.swift,
 				Domain/Interfaces/LocationsRepository.swift,
+				Domain/Interfaces/RemoteLocationsRepository.swift,
 				Presentation/LocationsListViewModel.swift,
 				Shared/Constants.swift,
+				"Shared/URL+Wikipedia.swift",
 			);
 			target = E773AA312F33B4B600F4585A /* PlacesTests */;
 		};
