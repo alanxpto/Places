@@ -45,4 +45,7 @@ Tests can be run directly from Xcode using the `PlacesTests` test target.
 
 ## Future Improvements
 
+Add localization for all strings.
+Add unit tests for the LocationsRepositoryAPI, passing a mock URLSession as parameter.
+
 ---
