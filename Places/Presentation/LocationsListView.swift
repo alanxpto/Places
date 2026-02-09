@@ -6,28 +6,20 @@ struct LocationsListView: View {
     @StateObject private var viewModel = LocationsListViewModel(locationsRepository: RemoteLocationsRepository())
     
     @State private var selectedLocationID: UUID?
-    @State private var showInputLocation = false
-    @State private var showError = false
-    @State private var isLoading = false
+    @State private var showInputLocation = false    
     
     var body: some View {
         ZStack {
             contentView()
             
-            if isLoading {
+            if viewModel.isLoading {
                 loadingView()
             }
         }
         .task {
-            isLoading = true
-            
             await viewModel.getAllLocations()
-            
-            isLoading = false
-            
-            showError = viewModel.errorMessage != nil
         }
-        .alert(viewModel.errorMessage ?? "", isPresented: $showError) {
+        .alert(viewModel.errorMessage ?? "", isPresented: $viewModel.showError) {
             Button("OK") {
                 viewModel.errorMessage = nil
             }
@@ -101,13 +93,12 @@ struct LocationsListView: View {
                     .font(.callout)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
-            .cornerRadius(8)
             .contentShape(Rectangle())
             .listRowBackground(
                 selectedLocationID == location.id ? Color("abn_green").opacity(0.3) : Color.clear
             )
             .onTapGesture {
-                if let url = URL.wikipediaPlaces(latitude: location.lat, longitude: location.long) {
+                viewModel.didSelect(location: location) { url in
                     openURL(url)
                 }
                 

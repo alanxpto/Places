@@ -7,6 +7,8 @@ final class LocationsListViewModel: ObservableObject {
 
     @Published var locations: [Location] = []
     @Published var errorMessage: String?
+    @Published var isLoading = false
+    @Published var showError = false
 
     init(locationsRepository: LocationsRepository) {
         self.locationsRepository = locationsRepository
@@ -14,15 +16,22 @@ final class LocationsListViewModel: ObservableObject {
     
     func getAllLocations() async {
         do {
+            isLoading = true
+            
             let response = try await locationsRepository.fetchAll(
                 url: Constants.locationsUrl
             )
             
             locations = locationsRepository.parseLocationsResponse(locationResponse: response)
+            
+            isLoading = false
         } catch {
             let error = error as? LocationRepositoryError ?? .unknownError
             
             errorMessage = error.userMessage
+            
+            showError = true
+            isLoading = false
             
             locations = []
         }
@@ -42,5 +51,11 @@ final class LocationsListViewModel: ObservableObject {
     
     func addLocation(location: Location) {
         locations.append(location)
+    }
+    
+    func didSelect(location: Location, openUrl: @escaping (URL) -> Void) {
+        if let url = URL.wikipediaPlaces(latitude: location.lat, longitude: location.long) {
+            openUrl(url)
+        }
     }
 }

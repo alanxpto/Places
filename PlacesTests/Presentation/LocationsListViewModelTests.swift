@@ -20,6 +20,8 @@ struct LocationsListViewModelTests {
         
         await sut.getAllLocations()
         
+        print("Alan - sut.locations.count \(sut.locations.count) !!")
+        
         #expect(sut.locations.count == 3)
         #expect(sut.locations[0].name == "Amsterdam")
         #expect(sut.locations[1].name == "Mumbai")

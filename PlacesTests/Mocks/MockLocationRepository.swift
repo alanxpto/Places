@@ -26,6 +26,13 @@ final class MockLocationRepository: LocationsRepository {
     }
     
     func parseLocationsResponse(locationResponse: LocationsResponse?) -> [Location] {
-        return []
+        return locationResponse?.locations.map { locationResponse in
+            Location(
+                id: UUID(),
+                name: locationResponse.name ?? "Unknown",
+                lat: locationResponse.lat,
+                long: locationResponse.long
+            )
+        } ?? []
     }
 }

@@ -15,7 +15,7 @@ struct RemoteLocationsRepositoryTests {
     }
     
     @Test("The locations response is empty if there are no locations to parse")
-    func testThatLocationsResponseIsParsedToLocationX() {
+    func testThatLocationsResponseIsEmptyIfNoLocationsToParse() {
         let sut = RemoteLocationsRepository()
         
         let parsed = sut.parseLocationsResponse(locationResponse: nil)
