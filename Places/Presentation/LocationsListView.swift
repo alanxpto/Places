@@ -8,18 +8,22 @@ struct LocationsListView: View {
     @State private var selectedLocationID: UUID?
     @State private var showInputLocation = false
     @State private var showError = false
+    @State private var isLoading = false
     
     var body: some View {
-        VStack {
-            headerSectionView()
-                .padding(.horizontal, 16)
+        ZStack {
+            contentView()
             
-            listSectionView()
-                .padding(.horizontal, 16)
+            if isLoading {
+                loadingView()
+            }
+        }
+        .task {
+            isLoading = true
             
-            Spacer()
-        }.task {
             await viewModel.getAllLocations()
+            
+            isLoading = false
             
             showError = viewModel.errorMessage != nil
         }
@@ -30,6 +34,31 @@ struct LocationsListView: View {
         }
         .sheet(isPresented: $showInputLocation) {
             InputLocationView(viewModel: viewModel)
+        }
+    }
+    
+    private func contentView() -> some View {
+        VStack {
+            headerSectionView()
+                .padding(.horizontal, 16)
+            
+            listSectionView()
+                .padding(.horizontal, 16)
+            
+            Spacer()
+        }
+    }
+    
+    private func loadingView() -> some View {
+        ZStack {
+            Color.black.opacity(0.3)
+                .ignoresSafeArea()
+            
+            VStack {
+                ProgressView()
+                
+                Text("Loading...")
+            }
         }
     }
     

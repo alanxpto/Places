@@ -21,7 +21,9 @@ final class LocationsListViewModel: ObservableObject {
             locations = parseLocationsResponse(locationResponse: response)
         } catch {
             let error = error as? LocationRepositoryError ?? .unkownError
+            
             errorMessage = message(for: error)
+            
             locations = []
         }
     }
