@@ -13,4 +13,13 @@ struct RemoteLocationsRepositoryTests {
         #expect(parsed[1].lat == 19.0823998)
         #expect(parsed[2].long == 12.523785)
     }
+    
+    @Test("The locations response is empty if there are no locations to parse")
+    func testThatLocationsResponseIsParsedToLocationX() {
+        let sut = RemoteLocationsRepository()
+        
+        let parsed = sut.parseLocationsResponse(locationResponse: nil)
+        
+        #expect(parsed.count == 0)
+    }
 }

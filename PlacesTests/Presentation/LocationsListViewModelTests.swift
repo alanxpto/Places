@@ -78,19 +78,4 @@ struct LocationsListViewModelTests {
             #expect(sut.locations[3].long == -73.93)
         }
     }
-    
-    @Test("The error message is correct")
-    func testThatErrorMessageIsCorrect() async throws {
-        let mock = MockLocationRepository(shouldFail: false)
-        let sut = LocationsListViewModel(locationsRepository: mock)
-        
-        var message = sut.message(for: .decodingError)
-        #expect(message == "Failed to read server response")
-        
-        message = sut.message(for: .invalidUrl)
-        #expect(message == "Invalid URL")
-        
-        message = sut.message(for: .unknownError)
-        #expect(message == "Something went wrong")
-    }
 }

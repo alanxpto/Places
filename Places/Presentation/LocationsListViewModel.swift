@@ -22,7 +22,7 @@ final class LocationsListViewModel: ObservableObject {
         } catch {
             let error = error as? LocationRepositoryError ?? .unknownError
             
-            errorMessage = message(for: error)
+            errorMessage = error.userMessage
             
             locations = []
         }
@@ -42,16 +42,5 @@ final class LocationsListViewModel: ObservableObject {
     
     func addLocation(location: Location) {
         locations.append(location)
-    }
-    
-    func message(for error: LocationRepositoryError) -> String {
-        switch error {
-        case .invalidUrl:
-            return "Invalid URL"
-        case .decodingError:
-            return "Failed to read server response"
-        case .unknownError:
-            return "Something went wrong"
-        }
     }
 }
