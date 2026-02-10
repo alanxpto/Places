@@ -80,4 +80,16 @@ struct LocationsListViewModelTests {
             #expect(sut.locations[3].long == -73.93)
         }
     }
+    
+    @Test("The url can be opened if the location is valid")
+    func testThatUrlCanBeOpenedWithValidLocation() async throws {
+        let mock = MockLocationRepository(shouldFail: false)
+        let sut = LocationsListViewModel(locationsRepository: mock)
+        
+        let location = Location(id: UUID(), name: "New York", lat: 40.73, long: -73.93)
+        
+        sut.didSelect(location: location) { url in
+            #expect(url.absoluteString == "wikipedia://places?latitude=40.73&longitude=-73.93")
+        }
+    }
 }
