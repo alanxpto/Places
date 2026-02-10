@@ -12,8 +12,12 @@ final class RemoteLocationsRepository: LocationsRepository {
             throw LocationRepositoryError.invalidUrl
         }
         
-        let (data, _) = try await session.data(from: url)
-        
+        let (data, response) = try await session.data(from: url)
+
+        guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+            throw LocationRepositoryError.invalidResponse
+        }
+
         do {
             let json = try await Task {
                 try JSONDecoder().decode(LocationsResponse.self, from: data)

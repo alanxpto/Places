@@ -11,5 +11,8 @@ struct LocationRepositoryErrorTests {
         
         message = LocationRepositoryError.unknownError.userMessage
         #expect(message == "Something went wrong")
+        
+        message = LocationRepositoryError.invalidResponse.userMessage
+        #expect(message == "Invalid server response")
     }
 }
