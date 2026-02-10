@@ -37,6 +37,13 @@
 			);
 			target = E773AA312F33B4B600F4585A /* PlacesTests */;
 		};
+		E773AC882F3B5D6B00F4585A /* Exceptions for "PlacesTests" folder in "Places" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Mocks/MockLocationRepository.swift,
+			);
+			target = E773A9922F33564500F4585A /* Places */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -50,6 +57,9 @@
 		};
 		E773AA332F33B4B600F4585A /* PlacesTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				E773AC882F3B5D6B00F4585A /* Exceptions for "PlacesTests" folder in "Places" target */,
+			);
 			path = PlacesTests;
 			sourceTree = "<group>";
 		};

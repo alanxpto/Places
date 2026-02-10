@@ -2,11 +2,15 @@ import SwiftUI
 
 struct LocationsListView: View {
     @Environment(\.openURL) private var openURL
-    
-    @StateObject private var viewModel = LocationsListViewModel(locationsRepository: RemoteLocationsRepository())
-    
+
+    @StateObject private var viewModel: LocationsListViewModel
+
     @State private var selectedLocationID: UUID?
-    @State private var showInputLocation = false    
+    @State private var showInputLocation = false
+    
+    init(viewModel: LocationsListViewModel) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+    }
     
     var body: some View {
         ZStack {
@@ -110,5 +114,5 @@ struct LocationsListView: View {
 }
 
 #Preview {
-    LocationsListView()
+    LocationsListView(viewModel: LocationsListViewModel(locationsRepository: MockLocationRepository(shouldFail: false)))
 }

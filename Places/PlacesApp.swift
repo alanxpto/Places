@@ -4,7 +4,11 @@ import SwiftUI
 struct PlacesApp: App {
     var body: some Scene {
         WindowGroup {
-            LocationsListView()
+            LocationsListView(
+                viewModel: LocationsListViewModel(
+                    locationsRepository: RemoteLocationsRepository()
+                )
+            )
         }
     }
 }
