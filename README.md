@@ -25,7 +25,7 @@ open Places.xcodeproj
 The app follows Clean Architecture with MVVM.
 
 The **Domain** layer contains the core entities (`Location`, `LocationResponse`, `LocationsResponse`) and the interfaces that define how location
-data is fetched, exposed via `LocationsRepositoryAPI`.
+data is fetched, exposed via `RemoteLocationsRepository`.
 
 The **Presentation** layer contains the business logic (ViewModels). It fetches data from the domain interfaces, prepares it for presentation, and
 exposes observable state to the views.
@@ -46,6 +46,7 @@ Tests can be run directly from Xcode using the `PlacesTests` test target.
 ## Future Improvements
 
 Add localization for all strings.
-Add unit tests for the LocationsRepositoryAPI, passing a mock URLSession as parameter.
+
+Add unit tests for the RemoteLocationsRepository, passing a mock URLSession as parameter.
 
 ---
