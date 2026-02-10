@@ -39,6 +39,10 @@ The app consists of two main views:
 
 Tapping a location in the list opens the Wikipedia app on the Places tab for the selected location.
 
+## Accessibility
+
+The project uses Dynamic Type Sizes, so each visible text in the app adapts to the Accessibility settings chosen by the user (Settings -> Accessibility -> Display & Text Size -> Larger Text).
+
 ## Testing
 
 Tests can be run directly from Xcode using the `PlacesTests` test target.
